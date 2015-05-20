@@ -1,3 +1,6 @@
+# ShortStack Fork Notes:
+This was forked to replace the [httparty](https://github.com/jnunemaker/httparty) dependency with [faraday](https://github.com/lostisland/faraday). This is done to maintain similar dependencies across our projects.
+
 # mbsy [![Gem Version](https://badge.fury.io/rb/mbsy.svg)](http://badge.fury.io/rb/mbsy) [![Dependency Status](https://gemnasium.com/GetAmbassador/mbsy.svg)](https://gemnasium.com/GetAmbassador/mbsy)
 
 Ambassador API wrapper for Ruby.
