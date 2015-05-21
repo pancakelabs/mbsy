@@ -7,10 +7,6 @@ module Mbsy
   class BadResponse < MbsyError; end
 
   class Base
-    include HTTParty
-    format :json
-    default_timeout 30
-    default_params :output => 'json'
 
     def self.element_name
       name.split(/::/).last.underscore
@@ -19,9 +15,23 @@ module Mbsy
     def self.api_url(method)
       Mbsy.site_uri + self.element_name + '/' + method
     end
- 
+
     def self.call(method, params = {})
-      response = JSON.parse(self.get(api_url(method), :query => params).body)['response']
+      url = api_url(method)
+      conn = Faraday.new(:url => url) do |faraday|
+        faraday.request :url_encoded
+        faraday.response :logger
+        faraday.adapter Faraday.default_adapter # Net::HTTP
+      end
+
+      response = conn.get do |req|
+        req.url url
+        req.options.timeout = 30
+        req.params = params
+        req.params[:output] = 'json'
+      end
+
+      response = JSON.parse(response.body)['response']
       case response['code']
       when '200' # Nothing to do here...
       when '400'

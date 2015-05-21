@@ -1,4 +1,4 @@
-require 'httparty'
+require 'faraday'
 require 'json'
 require 'mbsy/resources/base'
 require 'mbsy/resources/ambassador'
