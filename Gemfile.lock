@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     mbsy (1.1.2)
-      faraday (>= 0.9.1)
+      faraday (>= 0.8.9)
       json (>= 1.7.3)
 
 GEM
