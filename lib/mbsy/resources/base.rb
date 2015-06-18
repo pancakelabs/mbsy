@@ -18,6 +18,7 @@ module Mbsy
 
     def self.call(method, params = {})
       url = api_url(method)
+      
       conn = Faraday.new(:url => url) do |faraday|
         faraday.request :url_encoded
         faraday.response :logger
@@ -26,7 +27,14 @@ module Mbsy
 
       response = conn.get do |req|
         req.url url
-        req.options[:timeout] = 30
+
+        # Backwards compatibility for Faraday 0.8.x
+        if req.options.is_a?(Hash)
+          req.options[:timeout] = 10
+        else
+          req.options.timeout = 10
+        end
+
         req.params = params
         req.params[:output] = 'json'
       end
