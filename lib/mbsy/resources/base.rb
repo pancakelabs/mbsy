@@ -26,7 +26,7 @@ module Mbsy
 
       response = conn.get do |req|
         req.url url
-        req.options.timeout = 30
+        req.options[:timeout] = 30
         req.params = params
         req.params[:output] = 'json'
       end
