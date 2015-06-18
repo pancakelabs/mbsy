@@ -1,3 +1,4 @@
+require 'cgi'
 require 'faraday'
 require 'json'
 require 'mbsy/resources/base'
